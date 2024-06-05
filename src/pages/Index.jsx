@@ -1,7 +1,18 @@
 import { Container, Text, VStack, Box, Heading, Button, Image, SimpleGrid } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import Rating from "../components/Rating.jsx";
+import { useState } from "react";
 
 const Index = () => {
+  const [ratings, setRatings] = useState({});
+
+  const handleRatingChange = (recipeId, rating) => {
+    setRatings((prevRatings) => ({
+      ...prevRatings,
+      [recipeId]: rating,
+    }));
+  };
+
   return (
     <Container maxW="container.xl" p={4}>
       <Box as="header" textAlign="center" py={10}>
@@ -18,6 +29,11 @@ const Index = () => {
             <Box p={6}>
               <Heading as="h3" size="md" mb={2}>Recipe Title 1</Heading>
               <Text>Short description of the recipe.</Text>
+              <Rating
+                rating={ratings[1] || 0}
+                setRating={(rating) => handleRatingChange(1, rating)}
+              />
+              <Text mt={2}>Average Rating: {ratings[1] || 0} / 5</Text>
             </Box>
           </Box>
           <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -25,6 +41,11 @@ const Index = () => {
             <Box p={6}>
               <Heading as="h3" size="md" mb={2}>Recipe Title 2</Heading>
               <Text>Short description of the recipe.</Text>
+              <Rating
+                rating={ratings[2] || 0}
+                setRating={(rating) => handleRatingChange(2, rating)}
+              />
+              <Text mt={2}>Average Rating: {ratings[2] || 0} / 5</Text>
             </Box>
           </Box>
           <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -32,6 +53,11 @@ const Index = () => {
             <Box p={6}>
               <Heading as="h3" size="md" mb={2}>Recipe Title 3</Heading>
               <Text>Short description of the recipe.</Text>
+              <Rating
+                rating={ratings[3] || 0}
+                setRating={(rating) => handleRatingChange(3, rating)}
+              />
+              <Text mt={2}>Average Rating: {ratings[3] || 0} / 5</Text>
             </Box>
           </Box>
         </SimpleGrid>
